@@ -12,7 +12,7 @@ const uri = 'mongodb+srv://user:user@cluster0-n7lzl.mongodb.net/test?retryWrites
 mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true});
 const db = mongoose.connection;
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || "https://comp3133-chat-app.herokuapp.com/";
 
 const router = require('./router')
 
