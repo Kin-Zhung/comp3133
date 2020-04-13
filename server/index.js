@@ -3,9 +3,10 @@ const socketio= require('socket.io');
 const http = require('http');
 const path = require('path');
 const mongoose = require('mongoose');
-const Message = require('./model/message')
-const EventLog = require('./model/eventLog')
+const Message = require('./model/message');
+const EventLog = require('./model/eventLog');
 const {addUser, removeUser, getUser, getUserInRoom} = require ('./users');
+const cors = require('cors');
 
 const uri = 'mongodb+srv://user:user@cluster0-n7lzl.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true});
@@ -17,15 +18,15 @@ const router = require('./router')
 
 const app = express();
 if(process.env.NODE_ENV ==='production'){
-    app.use(express.static('client/build'));
+    app.use(express.static("client/build"));
 
     app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+        res.sendFile(path.resolve(__dirname,'../client','build','index.html'));
     })
 }
 
-//const server = http.createServer(app);
-//const io = socketio(server);
+const server = http.createServer(app);
+const io = socketio(server);
 
 io.on('connection',(socket)=>{
     console.log('user connected');
