@@ -24,7 +24,7 @@ export default class EventHistory extends Component{
     }
 }
     componentDidMount(){
-        axios.get('https://comp3133-chat-app.herokuapp.com/eventlog/').then(res =>{
+        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/eventlog/').then(res =>{
             this.setState({events: res.data})
             console.log(this.state.events);
         }).catch((error) =>{
@@ -34,7 +34,7 @@ export default class EventHistory extends Component{
         
     }
     deleteEvent(id){
-        axios.delete('https://comp3133-chat-app.herokuapp.com//eventlog/'+id).then(res => console.log(res.data));
+        axios.delete('https://comp3133-chat-app.herokuapp.com/dashboard/eventlog/'+id).then(res => console.log(res.data));
         this.setState({
             events: this.state.events.filter(el => el._id !== id)
         })   
