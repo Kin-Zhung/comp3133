@@ -30,7 +30,9 @@ export default class Admin extends Component{
                 <div><input placeholder ="Username" className="joinInput" id="username" type="text" onChange={this.handleChange}></input></div>
                 <br/>
                 <div><input placeholder ="password" className="joinInput" id="password" type="text" onChange={this.handleChange}></input></div>
-                <button >Submit</button>
+                <Link to='/dashboard'>
+                <button >submit</button>
+                </Link>
                 </form>
             </div>
         )
