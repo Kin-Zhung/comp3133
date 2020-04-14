@@ -11,21 +11,34 @@ const db = mongoose.connection;
 router.get('/', (req,res)=>{
     res.send('server is up and running');
 });
-router.get('/eventlog', (req, res)=>
+router.route('/admin').post((req, res)=>
     {
-        console.log(eventdata);
-        var data = JSON.stringify(eventdata);
-        res.send(data);
+        if(req.body.username == 'admin' && req.body.password == 'password'){
+            res.send({auth: 'true'});
+        }
+    }
+);
+router.route('/eventlog').get((req, res)=>
+    {
+        EventLog.find().then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
+    }
+);
+router.route('/eventlog/:id').delete((req, res)=>
+    {
+        EventLog.findByIdAndDelete(req.params.id).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
+    }
+);
+router.route('/history').get((req, res)=>
+    {
+        Message.find().then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
+    }
+);
+router.route('/roomhistory').get((req, res)=>
+    {
+        Message.find({'chat': 'test'}).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
     }
 )
-router.get('/history', (req, res)=>
-    {
-        console.log(historydata);
-        var data = JSON.stringify(historydata);
-        res.send(data);
-    }
-)
-router.get('/roomhistory', (req, res)=>
+router.route('/dashboard').get((req, res)=>
     {
         console.log(historyroom);
         var data = JSON.stringify(historyroom);
@@ -33,15 +46,4 @@ router.get('/roomhistory', (req, res)=>
     }
 )
 
-var eventdata =  EventLog.find()
-.exec()
-.then();
-
-var historydata =  Message.find()
-.exec()
-.then();
-
-var historyroom =  Message.find({'chat': 'test'})
-.exec()
-.then();
 module.exports = router;
