@@ -22,14 +22,17 @@ const Filterlist = props =>(
 export default class FilterHistory extends Component{
     constructor(props){
     super(props);
+
+    this.onChangeRoom = this.onChangeRoom.bind(this);
     this.state ={
         history: [],
-        rooms: []
+        rooms: [],
+        filter: String
     };
     }
     componentDidMount(){
         axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/filter/').then(res =>{
-            this.setState({room: res.data})
+            this.setState({rooms: res.data})
             console.log(this.state.room);
         }).catch((error) =>{
             console.log(error)
@@ -50,13 +53,27 @@ export default class FilterHistory extends Component{
             return <Filterlist data={historydata} deleteRoom={this.deleteRoom} key={historydata._id}/>
         })
     }
+    onChangeRoom(e){
+        this.setState({
+            filter: e.target.value
+        })
+        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/filter/'+this.filter).then(res =>{
+            this.setState({history: res.data})
+            console.log(this.state.history);
+        }).catch((error) =>{
+            console.log(error)
+        });
+    }
     render(){
         return(
             <div>
             <form>
-            {/* <select ref="rooms" required value={this.state.rooms} on onChange={this.onChangeRoom}>
-                    {this.state.rooms.map(function(room){<option key={room} value={room}>{room}</option>})}
-                </select> */}
+             <select ref="rooms" required value={this.state.rooms} on onChange={this.onChangeRoom}>
+                    {this.state.rooms.map(function(room){
+                        return <option key = {room} value ={room}>{room}</option>
+                    })}
+             </select>
+             {/* <button onClick={}>search</button>  */}
             </form>
                 <h1>history</h1>
                 <table>

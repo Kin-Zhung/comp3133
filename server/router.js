@@ -43,6 +43,12 @@ router.route('/filter').get((req, res)=>
         Message.find().distinct('chat').then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
     }
 )
+router.route('/filter/:filter').get((req, res)=>
+    {
+        Message.find({'chat': req.params.filter}).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
+    }
+)
+
 router.route('/dashboard').get((req, res)=>
     {
         console.log(historyroom);
