@@ -38,9 +38,9 @@ router.route('/history/:id').delete((req, res)=>
         Message.findByIdAndDelete(req.params.id).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
     }
 );
-router.route('/roomhistory').get((req, res)=>
+router.route('/filter').get((req, res)=>
     {
-        Message.find({'chat': 'test'}).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
+        Message.find().distinct('chat').then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
     }
 )
 router.route('/dashboard').get((req, res)=>
