@@ -1,43 +1,74 @@
 import React,{Component, useState} from'react'
-import {Link,useHistory,withRouter} from 'react-router-dom'
+import {Link,useHistory,withRouter,Redirect} from 'react-router-dom'
 import axios from 'axios'
 import '../style.css';
 
 export default class Admin extends Component{
-    state = {
+    constructor(props){
+    super(props);
+    
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.state = {
         username: '',
         password: '',
-        auth:''
-    }
-    handleChange = (e) =>{
+        auth: false
+    };
+}
+    handleChangeUsername = (e) =>{
         this.setState({
-            [e.target.id]: e.target.value
+            username: e.target.value
         })
+        console.log(this.state.username);
+    }
+    handleChangePassword = (e) =>{
+        this.setState({
+            password: e.target.value
+        })
+        console.log(this.state.password);
     }
     handleSubmit =(e) =>{
-        e.preventDEFAULT();
-        let history = useHistory();
-        console.log(this.username);
-        console.log(this.password);
-        //  if(this.username === "admin" && this.password === "password"){
-        //      history.push("/dashboard");
-        // }else{
-        //     history.push("/admin");
-        // }
-        history.replace("/dashboard")
+        //e.preventdefault();
+        //let history = useHistory();
+        // console.log(this.state.username);
+        // //console.log(this.state.password);
+        if(this.state.username === 'admin' && this.state.password === 'password'){
+             this.setState({
+                 auth: true
+             });
+        }else{
+            this.setState({
+                auth:false
+            });
+        }
+        console.log(this.state.password)
+        console.log(this.state.username)
+        console.log(this.state.auth);
+        // this.state.auth = true;
+         //window.location.reload();
     }
     render(){
+        if (this.state.auth === true) {
+            return <Redirect to='/dashboard' />
+          }
         return(
             <div>
-                <form>
-                <div><input placeholder ="Username" className="joinInput" id="username" type="text" onChange={this.handleChange}></input></div>
+                {/* <form onSubmit={(e)=>this.handleSubmit(e)}>
+                <div><input placeholder ="Username" className="joinInput" id="username" type="text" onChange={this.handleChangeUsername}></input></div>
                 <br/>
-                <div><input placeholder ="password" className="joinInput" id="password" type="text" onChange={this.handleChange}></input></div>
+                <div><input placeholder ="password" className="joinInput" id="password" type="text" onChange={this.handleChangePassword}></input></div>
 
-                <button onClick={this.handleSubmit}>submit</button>
+                <button onClick={(e)=>this.handleSubmit(e)}>submit</button>
 
-                </form>
+                </form> */}
+                                <div><input placeholder ="Username" className="joinInput" id="username" type="text" onChange={this.handleChangeUsername}></input></div>
+                <br/>
+                <div><input placeholder ="password" className="joinInput" id="password" type="text" onChange={this.handleChangePassword}></input></div>
+
+                <button onClick={(e)=>this.handleSubmit(e)}>submit</button>
             </div>
         )
     }
 }
+

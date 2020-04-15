@@ -22,6 +22,10 @@ const Roomlist = props =>(
 export default class RoomHistory extends Component{
     constructor(props){
     super(props);
+
+    this.deleteRoom = this.deleteRoom.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+
     this.state ={
         room: []
     };

@@ -23,7 +23,8 @@ export default class FilterHistory extends Component{
     constructor(props){
     super(props);
     this.state ={
-        history: []
+        history: [],
+        rooms: ['test']
     };
     }
     componentDidMount(){
@@ -53,7 +54,9 @@ export default class FilterHistory extends Component{
         return(
             <div>
             <form>
-                <input type="Radio"></input>
+            {/* <select ref="rooms" required value={this.state.rooms} on onChange={this.onChangeRoom}>
+                    {this.state.rooms.map(function(room){<option key={room} value={room}>{room}</option>})}
+                </select> */}
             </form>
                 <h1>history</h1>
                 <table>
