@@ -6,7 +6,7 @@ const messageSchema = new schema({
     chat:{type: String, required:true},
     userName:{type: String, required:true},
     message:{type:String, required:true},
-    //date:{type:Date, required:true}
+    date:{type:Date, required:true}
 }, {
     timestamps:true,
 });

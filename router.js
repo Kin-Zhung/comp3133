@@ -33,6 +33,11 @@ router.route('/history').get((req, res)=>
         Message.find().then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
     }
 );
+router.route('/history/:id').delete((req, res)=>
+    {
+        Message.findByIdAndDelete(req.params.id).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));
+    }
+);
 router.route('/roomhistory').get((req, res)=>
     {
         Message.find({'chat': 'test'}).then(history =>res.json(history)).catch(err => res.status(400).json('Error:' + err));

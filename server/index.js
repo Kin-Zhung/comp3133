@@ -86,7 +86,8 @@ io.on('connection',(socket)=>{
         const newMessage= new Message({
             chat: user.room,
             userName: user.name,
-            message: message
+            message: message,
+            date: new Date()
         });
         newMessage.save();
         callback();
