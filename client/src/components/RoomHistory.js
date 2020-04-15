@@ -8,7 +8,7 @@ const Roomlist = props =>(
     
     <tr>
         <td>{props.data.userName}</td>
-        <td>{props.data.timestamp}</td>
+        <td>{props.data.date}</td>
         <td>{props.data.message}</td>
         <td>{props.data.chat}</td>
         <td>

@@ -24,12 +24,12 @@ export default class FilterHistory extends Component{
     super(props);
     this.state ={
         history: [],
-        rooms: ['test']
+        rooms: []
     };
     }
     componentDidMount(){
-        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/history/').then(res =>{
-            this.setState({history: res.data})
+        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/filter/').then(res =>{
+            this.setState({room: res.data})
             console.log(this.state.room);
         }).catch((error) =>{
             console.log(error)
