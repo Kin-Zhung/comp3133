@@ -8,7 +8,7 @@ const Filterlist = props =>(
     
     <tr>
         <td>{props.data.userName}</td>
-        <td>{props.data.timestamp}</td>
+        <td>{props.data.date}</td>
         <td>{props.data.message}</td>
         <td>{props.data.chat}</td>
         <td>
@@ -37,15 +37,22 @@ export default class FilterHistory extends Component{
         }).catch((error) =>{
             console.log(error)
         });
+
+        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/filter/'+this.state.rooms[0]).then(res =>{
+            this.setState({history: res.data})
+            console.log(this.state.history);
+        }).catch((error) =>{
+            console.log(error)
+        });
         
         
     }
     deleteRoom(id){
         
         axios.delete('https://comp3133-chat-app.herokuapp.com/dashboard/history/'+id).then(res => console.log(res.data));
-        //this.setState({
-            //events: this.state.events.filter(el => el._id !== id)
-        //});
+        this.setState({
+            history: this.state.history.filter(el => el._id !== id)
+        });
         console.log(this.history)
     }
     filterList(){
@@ -57,7 +64,8 @@ export default class FilterHistory extends Component{
         this.setState({
             filter: e.target.value
         })
-        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/filter/'+this.filter).then(res =>{
+        
+        axios.get('https://comp3133-chat-app.herokuapp.com/dashboard/filter/'+e.target.value).then(res =>{
             this.setState({history: res.data})
             console.log(this.state.history);
         }).catch((error) =>{
@@ -68,7 +76,7 @@ export default class FilterHistory extends Component{
         return(
             <div>
             <form>
-             <select ref="rooms" required value={this.state.rooms} on onChange={this.onChangeRoom}>
+             <select ref="rooms" required value={this.state.filter}  onChange={this.onChangeRoom}>
                     {this.state.rooms.map(function(room){
                         return <option key = {room} value ={room}>{room}</option>
                     })}
