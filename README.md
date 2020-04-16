@@ -16,6 +16,3 @@ password:password
 https://comp3133-chat-app.herokuapp.com/
 
 
-admin login 
-Username:admin  
-password:password
