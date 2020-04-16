@@ -62,7 +62,7 @@ io.on('connection',(socket)=>{
     });
 
 
-    socket.on('disconnect', (callback) => {
+    socket.on('disconnect',(callback) => {
     
         socket.broadcast.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
         
