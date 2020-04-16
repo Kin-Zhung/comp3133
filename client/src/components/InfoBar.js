@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom'
 import '../style.css';
 const InfoBar = ({room}) =>(
     <div className="infoBar">
@@ -7,7 +7,7 @@ const InfoBar = ({room}) =>(
             <h1>{room}</h1>
         </div>
         <div className="rightInnderContainer">
-            <a href="/">close</a>
+            <Link to='/'><a>close</a></Link>
         </div>
 
     </div>
