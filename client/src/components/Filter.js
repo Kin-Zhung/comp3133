@@ -76,6 +76,7 @@ export default class FilterHistory extends Component{
         return(
             <div>
             <form>
+            <h5>Sort by room:</h5>
              <select ref="rooms" required value={this.state.filter}  onChange={this.onChangeRoom}>
                     {this.state.rooms.map(function(room){
                         return <option key = {room} value ={room}>{room}</option>
