@@ -64,7 +64,7 @@ io.on('connection',(socket)=>{
 
     socket.on('disconnect', () => {
     
-        io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+        socket.broadcast.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
         
         const eventLog= new EventLog({
             event: 'DISCONNECTION',
