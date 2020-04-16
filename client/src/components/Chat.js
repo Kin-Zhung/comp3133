@@ -64,6 +64,7 @@ const Chat = ({location}) =>{
             </div>
         </div>
         */
+       
     )
 }
 
