@@ -63,11 +63,9 @@ io.on('connection',(socket)=>{
 
 
     socket.on('disconnect', () => {
-        const user = removeUser(socket.id);
     
-        if(user) {
-          io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
-        }
+        io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+        
         const eventLog= new EventLog({
             event: 'DISCONNECTION',
             userName: user.name,
@@ -75,6 +73,7 @@ io.on('connection',(socket)=>{
             room: user.room
         });
         eventLog.save();
+        const user = removeUser(socket.id);
         callback();
       });
 
