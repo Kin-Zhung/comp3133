@@ -64,7 +64,7 @@ export default class Admin extends Component{
                 </form> */}
                                 <div><input placeholder ="Username" className="joinInput" id="username" type="text" onChange={this.handleChangeUsername}></input></div>
                 <br/>
-                <div><input placeholder ="password" className="joinInput" id="password" type="hidden" onChange={this.handleChangePassword}></input></div>
+                <div><input placeholder ="password" className="joinInput" id="password" type="password" onChange={this.handleChangePassword}></input></div>
 
                 <button onClick={(e)=>this.handleSubmit(e)}>submit</button>
             </div>
